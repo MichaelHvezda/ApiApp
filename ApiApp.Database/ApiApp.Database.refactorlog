@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Operations Version="1.0" xmlns="http://schemas.microsoft.com/sqlserver/dac/Serialization/2012/02">
+  <Operation Name="Rename Refactor" Key="ffb022e5-34e0-44eb-a51f-37499d6089d9" ChangeDateTime="03/19/2022 13:07:31">
+    <Property Name="ElementName" Value="[dbo].[Location].[Zip]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Location]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="ZipCode" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="fba98c62-8828-4146-a89c-ed7a028d4b45" ChangeDateTime="03/19/2022 15:22:27">
+    <Property Name="ElementName" Value="[dbo].[RoomVariant].[GuestSize]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[RoomVariant]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="GuestCount" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="8f5912aa-211c-4753-be80-665f90941ff8" ChangeDateTime="03/19/2022 15:23:57">
+    <Property Name="ElementName" Value="[dbo].[Image].[TipId]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Image]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="TripId" />
+  </Operation>
+</Operations>
