@@ -1,5 +1,7 @@
 ﻿# npm init -y
-npm install --save dotvvm-jscomponent-react react react-dom
+npm i react@16.14.0
+#npm install --save dotvvm-jscomponent-react react react-dom
+npm install --save dotvvm-jscomponent-react react-dom
 npm install recharts
 npm i state-manager
 npm i types.d.ts
@@ -12,6 +14,7 @@ npm install --save mylib
 
 #npm install react-bootstrap bootstrap
 npm install @coreui/react
+npm i react-popper
 
 npm install rollup-plugin-peer-deps-external
 npm run build

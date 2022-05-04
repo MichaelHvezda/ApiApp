@@ -10,7 +10,7 @@ const minify = process.env.BUILD === 'production';
 export default [{
     input: [
         // list all your module files that will be imported in the page
-        'TypeScript/FirstModule.tsx'
+        'TypeScript/ReactModules.tsx'
     ],
     output: {
         dir: 'wwwroot',

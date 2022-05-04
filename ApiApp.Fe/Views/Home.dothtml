@@ -1,23 +1,27 @@
 ﻿@viewModel ApiApp.Fe.Views.Home, ApiApp.Fe
 @masterPage Views/Base/MasterPage.dotmaster
-@js JSFirstModule
+@js ReactModules
 
 <dot:Content ContentPlaceHolderID="MainContent">
     <div>
-
         <div>
-            <js:NavFull href="/" brandName="Odkaz">
+            <%--<js:NavFull HomeHref="/" BrandName="Odkaz" >
+            </js:NavFull>--%>
+            <js:NavFull HomeHref="/" src="okko">
+                <children>
+                    <div>fjjj</div>
+                    <div>hjj</div>
+                    <div>ggdg</div>
+                </children>
             </js:NavFull>
-            <%--<js:NavItem href="/" brandName="Odkaz">
-            </js:NavItem>--%>
         </div>
         <div>
-            <div>
+            <%--<div>
                 <js:Graff data={value: Data}
                           onMouse={staticCommand: (string n) => CurrentThing = n}
                           stroke="#f5f5f5">
                 </js:Graff>
-            </div>
+            </div>--%>
 
             <p>
                 <dot:Button Text="Regenerate data" Click="{command: Regenerate()}" />

@@ -47,8 +47,7 @@ namespace ApiApp.Fe
                 Location = new UrlResourceLocation("~/styles.css")
             });
 
-            config.Resources.Register("JSFirstModule", new ScriptModuleResource(new UrlResourceLocation("~/FirstModule.js")));
-            config.Resources.Register("ReactAppModule", new ScriptModuleResource(new UrlResourceLocation("~/ReactAppModule.js")));
+            config.Resources.Register("ReactModules", new ScriptModuleResource(new UrlResourceLocation("~/ReactModules.js")));
 
         }
 

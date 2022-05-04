@@ -13,6 +13,10 @@ namespace ApiApp.Fe.Views
         private Random random = new Random();
         public string CurrentThing { get; set; } = "Nic";
         public List<LinearRechartDataDTO> Data { get; set; }
+        public List<NavItems> NavList => new List<NavItems> { 
+            new NavItems() { Href = "/",HrefName = "Domů" },
+            new NavItems() { Href = "/Ínfo",HrefName = "Informace" },
+        };
         public void Clicked()
         {
 
@@ -48,5 +52,10 @@ namespace ApiApp.Fe.Views
         public int Line1 { get; set; }
         public int Line2 { get; set; }
         public int Line3 { get; set; }
+    }
+    public class NavItems
+    {
+        public string Href { get; set; }
+        public string HrefName { get; set; }
     }
 }

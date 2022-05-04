@@ -13,9 +13,12 @@
     <TypeScriptCompile Remove="%2a%2a\**" />
   </ItemGroup>
   <ItemGroup>
+    <Content Remove="wwwroot\ReactModules.js" />
+    <Content Remove="wwwroot\ReactModules.js.map" />
+  </ItemGroup>
+  <ItemGroup>
     <None Remove="dotvvm_serialized_config.json.tmp" />
     <None Remove="setup.ps1" />
-    <None Remove="TypeScript\FirstModule.tsx" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="setup.ps1" />
