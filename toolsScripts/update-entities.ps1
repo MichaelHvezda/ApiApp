@@ -1,4 +1,4 @@
-﻿Set-Location "$PSScriptRoot/ApiApp.Data"
+﻿Set-Location "$PSScriptRoot/../ApiApp.Data"
 
 #install dotnet-ef to .Data project
 

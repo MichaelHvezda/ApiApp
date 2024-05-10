@@ -31,30 +31,33 @@ namespace ApiApp.Fe
             // register custom resources and adjust paths to the built-in resources
             config.Resources.Register("bootstrap-css", new StylesheetResource
             {
-                Location = new UrlResourceLocation("~/lib/bootstrap/css/bootstrap.min.css")
+                Location = new UrlResourceLocation("~/lib/bootstrap/dist/css/bootstrap.min.css")
             });
             config.Resources.Register("bootstrap", new ScriptResource
             {
-                Location = new UrlResourceLocation("~/lib/bootstrap/js/bootstrap.min.js"),
+                Location = new UrlResourceLocation("~/lib/bootstrap/dist/js/bootstrap.min.js"),
                 Dependencies = new[] { "bootstrap-css", "jquery" }
             });
             config.Resources.Register("jquery", new ScriptResource
             {
                 Location = new UrlResourceLocation("~/lib/jquery/jquery.min.js")
             });
+            config.Resources.Register("htmx", new ScriptResource
+            {
+                Location = new UrlResourceLocation("~/lib/htmx/dist/htmx.min.js")
+            });
             config.Resources.Register("Styles", new StylesheetResource()
             {
-                Location = new UrlResourceLocation("~/styles.css")
+                Location = new UrlResourceLocation("~/style.css")
             });
 
-            config.Resources.Register("ReactModules", new ScriptModuleResource(new UrlResourceLocation("~/ReactModules.js")));
 
         }
 
-		public void ConfigureServices(IDotvvmServiceCollection options)
+        public void ConfigureServices(IDotvvmServiceCollection options)
         {
             options.AddDefaultTempStorages("temp");
             options.AddHotReload();
-		}
+        }
     }
 }

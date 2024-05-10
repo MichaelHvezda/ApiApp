@@ -12,8 +12,11 @@ namespace ApiApp.Fe.Views
     {
         private Random random = new Random();
         public string CurrentThing { get; set; } = "Nic";
+
+        [Bind(Direction.ServerToClientFirstRequest)]
+        public string ApiPath { get; set; } = "https://localhost:5011";
         public List<LinearRechartDataDTO> Data { get; set; }
-        public List<NavItems> NavList => new List<NavItems> { 
+        public List<NavItems> NavList => new List<NavItems> {
             new NavItems() { Href = "/",HrefName = "Domů" },
             new NavItems() { Href = "/Ínfo",HrefName = "Informace" },
         };

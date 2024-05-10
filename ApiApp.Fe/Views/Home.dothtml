@@ -1,31 +1,27 @@
 ﻿@viewModel ApiApp.Fe.Views.Home, ApiApp.Fe
 @masterPage Views/Base/MasterPage.dotmaster
-@js ReactModules
 
 <dot:Content ContentPlaceHolderID="MainContent">
     <div>
         <div>
-            <%--<js:NavFull HomeHref="/" BrandName="Odkaz" >
-            </js:NavFull>--%>
-            <js:NavFull HomeHref="/" src="okko">
-                <children>
-                    <div>fjjj</div>
-                    <div>hjj</div>
-                    <div>ggdg</div>
-                </children>
-            </js:NavFull>
-        </div>
-        <div>
-            <%--<div>
-                <js:Graff data={value: Data}
-                          onMouse={staticCommand: (string n) => CurrentThing = n}
-                          stroke="#f5f5f5">
-                </js:Graff>
-            </div>--%>
+            <button hx-get="https://localhost:5011/api" hx-target="#search-results" hx-swap="beforeend">
+                Click Me!
+            </button>
+            <p id="search-results"></p>
+            <div hx-confirm="Are you sure?">
+                <button hx-get="https://localhost:5011/api" hx-swap="outerHTML">
+                    Click Me! outer
+                </button>
+            </div>
+            <button hx-get="{value: _root.ApiPath + '/mvc'}" hx-swap="outerHTML" hx-disabled-elt="this">
+                Click Me! outer
+            </button>
 
-            <p>
-                <dot:Button Text="Regenerate data" Click="{command: Regenerate()}" />
-            </p>
+            <div hx-get="https://localhost:5011/mvc"
+                 hx-trigger="load delay:2s"
+                 hx-swap="outerHTML">
+                <span class="htmx-indicator">Wait for it!</span>
+            </div>
         </div>
     </div>
 </dot:Content>

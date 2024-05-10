@@ -8,16 +8,17 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApiApp", "ApiApp\ApiApp.csp
 		{50C1420B-D3B9-4AAD-B9CD-6D98BF9102A4} = {50C1420B-D3B9-4AAD-B9CD-6D98BF9102A4}
 	EndProjectSection
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "db", "db", "{8B7CED8F-398F-445E-81C9-2ECF24D5ECC5}"
-	ProjectSection(SolutionItems) = preProject
-		update-entities.ps1 = update-entities.ps1
-	EndProjectSection
-EndProject
-Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "ApiApp.Database", "ApiApp.Database\ApiApp.Database.sqlproj", "{67EE5934-C7E0-4DDA-A1AA-69F475B3B13C}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApiApp.Data", "ApiApp.Data\ApiApp.Data.csproj", "{50C1420B-D3B9-4AAD-B9CD-6D98BF9102A4}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApiApp.Fe", "ApiApp.Fe\ApiApp.Fe.csproj", "{A32E8552-FC44-41C5-B10D-3D3ADFC3761D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "toolsScripts", "toolsScripts", "{6EECD56F-405E-4E92-9E9B-54CD05EBBBD4}"
+	ProjectSection(SolutionItems) = preProject
+		toolsScripts\create-migration.ps1 = toolsScripts\create-migration.ps1
+		toolsScripts\delete-migration.ps1 = toolsScripts\delete-migration.ps1
+		toolsScripts\make-sql-from-migration.ps1 = toolsScripts\make-sql-from-migration.ps1
+		toolsScripts\update-entities.ps1 = toolsScripts\update-entities.ps1
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -35,18 +36,6 @@ Global
 		{4FBD8F61-D87D-415C-82D5-0FD0FB0802E8}.Release|Any CPU.Build.0 = Release|Any CPU
 		{4FBD8F61-D87D-415C-82D5-0FD0FB0802E8}.Release|x64.ActiveCfg = Release|x64
 		{4FBD8F61-D87D-415C-82D5-0FD0FB0802E8}.Release|x64.Build.0 = Release|x64
-		{67EE5934-C7E0-4DDA-A1AA-69F475B3B13C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{67EE5934-C7E0-4DDA-A1AA-69F475B3B13C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{67EE5934-C7E0-4DDA-A1AA-69F475B3B13C}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
-		{67EE5934-C7E0-4DDA-A1AA-69F475B3B13C}.Debug|x64.ActiveCfg = Debug|x64
-		{67EE5934-C7E0-4DDA-A1AA-69F475B3B13C}.Debug|x64.Build.0 = Debug|x64
-		{67EE5934-C7E0-4DDA-A1AA-69F475B3B13C}.Debug|x64.Deploy.0 = Debug|x64
-		{67EE5934-C7E0-4DDA-A1AA-69F475B3B13C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{67EE5934-C7E0-4DDA-A1AA-69F475B3B13C}.Release|Any CPU.Build.0 = Release|Any CPU
-		{67EE5934-C7E0-4DDA-A1AA-69F475B3B13C}.Release|Any CPU.Deploy.0 = Release|Any CPU
-		{67EE5934-C7E0-4DDA-A1AA-69F475B3B13C}.Release|x64.ActiveCfg = Release|x64
-		{67EE5934-C7E0-4DDA-A1AA-69F475B3B13C}.Release|x64.Build.0 = Release|x64
-		{67EE5934-C7E0-4DDA-A1AA-69F475B3B13C}.Release|x64.Deploy.0 = Release|x64
 		{50C1420B-D3B9-4AAD-B9CD-6D98BF9102A4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{50C1420B-D3B9-4AAD-B9CD-6D98BF9102A4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{50C1420B-D3B9-4AAD-B9CD-6D98BF9102A4}.Debug|x64.ActiveCfg = Debug|x64
@@ -66,9 +55,6 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(NestedProjects) = preSolution
-		{67EE5934-C7E0-4DDA-A1AA-69F475B3B13C} = {8B7CED8F-398F-445E-81C9-2ECF24D5ECC5}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {2D63F05D-18BB-4A31-A010-4B7647312ECB}

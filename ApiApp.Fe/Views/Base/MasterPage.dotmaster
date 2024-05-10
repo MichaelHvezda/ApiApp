@@ -7,11 +7,10 @@
     <title>ApiApp.Fe</title>
     <dot:RequiredResource Name="bootstrap" />
     <dot:RequiredResource Name="Styles" />
-    
+    <dot:RequiredResource Name="htmx" />
 </head>
 <body>
     <h1>ReactIntegrationDemo</h1>
     <dot:ContentPlaceHolder ID="MainContent" />
-
 </body>
 </html>
