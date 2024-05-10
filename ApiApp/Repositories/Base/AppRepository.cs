@@ -6,29 +6,20 @@ namespace ApiApp.Repositories
 {
     public class AppRepository<TEntity, TKey> : EntityFrameworkRepository<TEntity, TKey, Data.Entities.DatabaseContext> where TEntity : class, IEntity<TKey>, new()
     {
-        public readonly IMapper mapper;
 
         public AppRepository(IEntityFrameworkUnitOfWorkProvider<Data.Entities.DatabaseContext> unitOfWorkProvider, IDateTimeProvider dateTimeProvider) : base(unitOfWorkProvider, dateTimeProvider)
         {
-        }
-        public AppRepository(IEntityFrameworkUnitOfWorkProvider<Data.Entities.DatabaseContext> unitOfWorkProvider, IDateTimeProvider dateTimeProvider,IMapper mapper) : base(unitOfWorkProvider, dateTimeProvider, mapper)
-        {
-            this.mapper = mapper;
         }
     }
     /// <summary>
     /// A base implementation of a repository in Entity Framework.
     /// </summary>
-    /// 
+    ///
     public class EntityFrameworkRepository<TEntity, TKey> : EntityFrameworkRepository<TEntity, TKey, DbContext>
         where TEntity : class, IEntity<TKey>, new()
     {
         public EntityFrameworkRepository(IUnitOfWorkProvider unitOfWorkProvider, IDateTimeProvider dateTimeProvider)
             : base(unitOfWorkProvider, dateTimeProvider)
-        {
-        }
-        public EntityFrameworkRepository(IUnitOfWorkProvider unitOfWorkProvider, IDateTimeProvider dateTimeProvider, IMapper mapper)
-            : base(unitOfWorkProvider, dateTimeProvider, mapper)
         {
         }
     }
@@ -42,7 +33,7 @@ namespace ApiApp.Repositories
     {
         private readonly IUnitOfWorkProvider unitOfWorkProvider;
         private readonly IDateTimeProvider dateTimeProvider;
-        private readonly IMapper mapper;
+
 
         /// <summary>
         /// Gets the <see cref="DbContext"/>.
@@ -68,11 +59,6 @@ namespace ApiApp.Repositories
         {
         }
 
-        public EntityFrameworkRepository(IEntityFrameworkUnitOfWorkProvider<TDbContext> unitOfWorkProvider, IDateTimeProvider dateTimeProvider, IMapper mapper)
-            : this((IUnitOfWorkProvider)unitOfWorkProvider, dateTimeProvider, mapper)
-        {
-        }
-
         /// <summary>
         /// Initializes a new instance of the <see cref="EntityFrameworkRepository{TEntity, TKey, TDbContext}"/> class.
         /// </summary>
@@ -82,12 +68,6 @@ namespace ApiApp.Repositories
             this.dateTimeProvider = dateTimeProvider;
         }
 
-        protected EntityFrameworkRepository(IUnitOfWorkProvider unitOfWorkProvider, IDateTimeProvider dateTimeProvider, IMapper mapper)
-        {
-            this.unitOfWorkProvider = unitOfWorkProvider;
-            this.dateTimeProvider = dateTimeProvider;
-            this.mapper = mapper;
-        }
 
         /// <summary>
         /// Gets the entity with specified ID.
@@ -348,11 +328,11 @@ namespace ApiApp.Repositories
             return query;
         }
 
-        public IQueryable<TDto> GetAllMapped<TDto>()
-        {
-            IQueryable<TEntity> query = Context.Set<TEntity>();
-            return mapper.ProjectTo<TDto>(query);
-        }
+        //public IQueryable<TDto> GetAllMapped<TDto>()
+        //{
+        //    IQueryable<TEntity> query = Context.Set<TEntity>();
+        //    return mapper.ProjectTo<TDto>(query);
+        //}
 
         public int GetEntityCount()
         {

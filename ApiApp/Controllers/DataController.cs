@@ -11,7 +11,7 @@ namespace ApiApp.Controllers
     [Route("Api")]
     public class DataController : ApiBaseController<DataModel, DataController, int>
     {
-        public DataController(IMapper mapper, IUnitOfWorkProvider unitOfWorkProvider, ILogger<DataController> logger) : base(mapper, unitOfWorkProvider, logger)
+        public DataController(IUnitOfWorkProvider unitOfWorkProvider, ILogger<DataController> logger) : base(unitOfWorkProvider, logger)
         {
         }
 

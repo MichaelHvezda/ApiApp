@@ -15,12 +15,13 @@ namespace ApiApp.Controllers.Generic
 {
     public class ApiColectionController<TGetModel, TUpdateModel, TInsertModel, TController, TRepository, TEntity, TKey> : ApiController<TGetModel, TUpdateModel, TController, TRepository, TEntity, TKey>
         where TGetModel : BaseModel<TKey>
+        where TInsertModel : BaseModel<TKey>
         where TUpdateModel : BaseModel<TKey>
         where TEntity : class, IEntity<TKey>, new()
         where TRepository : AppRepository<TEntity, TKey>
 
     {
-        protected ApiColectionController(IMapper mapper, IUnitOfWorkProvider unitOfWorkProvider, ILogger<TController> logger, TRepository repositoty, IIncludeDefinition<TEntity>[] includes = default!) : base(mapper, unitOfWorkProvider, logger, repositoty, includes)
+        protected ApiColectionController(IUnitOfWorkProvider unitOfWorkProvider, ILogger<TController> logger, TRepository repositoty, IIncludeDefinition<TEntity>[] includes = default!) : base(unitOfWorkProvider, logger, repositoty, includes)
         {
         }
 
@@ -32,7 +33,7 @@ namespace ApiApp.Controllers.Generic
                 LogInformation(MethodBase.GetCurrentMethod().Name);
 
                 var uow = unitOfWorkProvider.Create();
-                var newEntity = mapper.Map<TEntity>(model);
+                var newEntity = MapToEntity().Invoke(model);
                 repositoty.Insert(newEntity);
                 await uow.CommitAsync();
 
@@ -56,7 +57,7 @@ namespace ApiApp.Controllers.Generic
                 var uow = unitOfWorkProvider.Create();
                 foreach (var model in modelList)
                 {
-                    var newEntity = mapper.Map<TEntity>(model);
+                    var newEntity = MapToEntity().Invoke(model);
                     repositoty.Insert(newEntity);
                     await uow.CommitAsync();
                 }
@@ -104,7 +105,16 @@ namespace ApiApp.Controllers.Generic
     {
         private readonly IIncludeDefinition<TEntity>[] includes;
 
-        protected ApiController(IMapper mapper, IUnitOfWorkProvider unitOfWorkProvider, ILogger<TController> logger, TRepository repositoty, IIncludeDefinition<TEntity>[] includes = default!) : base(mapper, unitOfWorkProvider, logger, repositoty)
+        protected virtual Func<BaseModel<TKey>, TEntity> MapToEntity()
+        {
+            return p => new() { Id = p.Id };
+        }
+        protected virtual Func<TEntity, BaseModel<TKey>> MapToModel()
+        {
+            return p => new() { Id = p.Id };
+        }
+
+        protected ApiController(IUnitOfWorkProvider unitOfWorkProvider, ILogger<TController> logger, TRepository repositoty, IIncludeDefinition<TEntity>[] includes = default!) : base(unitOfWorkProvider, logger, repositoty)
         {
             this.includes = includes;
         }
@@ -118,7 +128,7 @@ namespace ApiApp.Controllers.Generic
                 LogInformation(MethodBase.GetCurrentMethod().Name);
                 model.Id = Id;
                 var uow = unitOfWorkProvider.Create();
-                var newTrip = mapper.Map<TEntity>(model);
+                var newTrip = MapToEntity().Invoke(model);
                 repositoty.Update(newTrip);
                 await uow.CommitAsync();
 
@@ -151,10 +161,10 @@ namespace ApiApp.Controllers.Generic
                     entity = await repositoty.GetByIdAsync(Id, includes);
                 }
 
-                var res = mapper.Map<TGetModel>(entity);
+                var res = MapToModel().Invoke(entity);
 
                 LogOk(MethodBase.GetCurrentMethod().Name);
-                return OkDataResponse(res);
+                return Ok(res);
             }
             catch (Exception e)
             {
@@ -163,33 +173,33 @@ namespace ApiApp.Controllers.Generic
             }
         }
 
-#if DEBUG 
+#if DEBUG
         /// <summary>
-        /// Super slow metod 
+        /// Super slow metod
         /// </summary>
         /// <returns>Return all items</returns>
-        [Obsolete]
-        [HttpGet]
-        [Route("GetAll")]
-        public virtual ActionResult<List<TGetModel>> GetAll()
-        {
-            try
-            {
-                LogInformation(MethodBase.GetCurrentMethod().Name);
+        //[Obsolete]
+        //[HttpGet]
+        //[Route("GetAll")]
+        //public virtual ActionResult<List<TGetModel>> GetAll()
+        //{
+        //    try
+        //    {
+        //        LogInformation(MethodBase.GetCurrentMethod().Name);
 
-                var uow = unitOfWorkProvider.Create();
-                var data = repositoty.GetAllMapped<TGetModel>();
-                var list = data.ToList();
+        //        var uow = unitOfWorkProvider.Create();
+        //        var data = repositoty.GetAllMapped<TGetModel>();
+        //        var list = data.ToList();
 
-                LogOk(MethodBase.GetCurrentMethod().Name);
-                return OkDataResponse(list);
-            }
-            catch (Exception e)
-            {
-                LogException(MethodBase.GetCurrentMethod().Name, e);
-                return BadRequest();
-            }
-        }
+        //        LogOk(MethodBase.GetCurrentMethod().Name);
+        //        return OkDataResponse(list);
+        //    }
+        //    catch (Exception e)
+        //    {
+        //        LogException(MethodBase.GetCurrentMethod().Name, e);
+        //        return BadRequest();
+        //    }
+        //}
 #endif
 
     }
@@ -200,7 +210,7 @@ namespace ApiApp.Controllers.Generic
 
         protected readonly TRepository repositoty;
 
-        protected ApiBaseRepositoryController(IMapper mapper, IUnitOfWorkProvider unitOfWorkProvider, ILogger<TController> logger, TRepository repositoty) : base(mapper, unitOfWorkProvider, logger)
+        protected ApiBaseRepositoryController(IUnitOfWorkProvider unitOfWorkProvider, ILogger<TController> logger, TRepository repositoty) : base(unitOfWorkProvider, logger)
         {
             this.repositoty = repositoty;
         }
@@ -209,13 +219,11 @@ namespace ApiApp.Controllers.Generic
     public class ApiBaseController<TGetModel, TController, TKey> : ControllerBase
     where TGetModel : BaseModel<TKey>
     {
-        protected readonly IMapper mapper;
         protected readonly IUnitOfWorkProvider unitOfWorkProvider;
         protected readonly ILogger<TController> logger;
 
-        protected ApiBaseController(IMapper mapper, IUnitOfWorkProvider unitOfWorkProvider, ILogger<TController> logger)
+        protected ApiBaseController(IUnitOfWorkProvider unitOfWorkProvider, ILogger<TController> logger)
         {
-            this.mapper = mapper;
             this.unitOfWorkProvider = unitOfWorkProvider;
             this.logger = logger;
         }

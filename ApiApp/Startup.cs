@@ -30,7 +30,7 @@ namespace ApiApp
             services.AddDbContext<DatabaseContext>(options =>
                options.UseSqlServer(Configuration.GetConnectionString("DB")), ServiceLifetime.Transient);
 
-            services.AddAutoMapper(typeof(Startup));
+            //services.AddAutoMapper(typeof(Startup));
             services.AddScoped<IHttpContextAccessor, HttpContextAccessor>();
             services.AddSwaggerGen();
         }

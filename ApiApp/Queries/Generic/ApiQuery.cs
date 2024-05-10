@@ -1,5 +1,4 @@
 ﻿using ApiApp.Data.Entities;
-using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Riganti.Utils.Infrastructure.Core;
 using Riganti.Utils.Infrastructure.EntityFrameworkCore;
@@ -12,18 +11,15 @@ namespace ApiApp.Queries.Generic
 {
     public abstract class ApiQuery<ResModel> : EntityFrameworkQuery<ResModel, DatabaseContext>
     {
-        protected readonly IMapper mapper;
-
-        protected ApiQuery(IMapper mapper, IUnitOfWorkProvider unitOfWorkProvider) : base(unitOfWorkProvider)
+        protected ApiQuery(IUnitOfWorkProvider unitOfWorkProvider) : base(unitOfWorkProvider)
         {
-            this.mapper = mapper;
         }
     }
     public abstract class ApiQuery<ResModel, FilterModel> : ApiQuery<ResModel>
     {
-        public FilterModel filter { get; set; }
+        public FilterModel Filter { get; set; }
 
-        protected ApiQuery(IMapper mapper, IUnitOfWorkProvider unitOfWorkProvider) : base(mapper,unitOfWorkProvider)
+        protected ApiQuery(IUnitOfWorkProvider unitOfWorkProvider) : base(unitOfWorkProvider)
         {
         }
     }

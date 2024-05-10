@@ -1,5 +1,4 @@
-﻿global using AutoMapper;
-global using Riganti.Utils.Infrastructure.Core;
+﻿global using Riganti.Utils.Infrastructure.Core;
 global using Riganti.Utils.Infrastructure.EntityFrameworkCore;
 global using System;
 global using System.Collections.Generic;
